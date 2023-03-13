@@ -1,8 +1,8 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Move code down and up respectively
-vim.keymap.set("v", "qq", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "ww", ":m '<-2<CR>gv=gv")
+vim.keymap.set("v", "<A-,>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "<A-.>", ":m '<-2<CR>gv=gv")
 
 -- split vertically and split horizontally
 -- navigate and close.

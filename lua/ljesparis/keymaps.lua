@@ -6,12 +6,12 @@ vim.keymap.set("v", "<A-.>", ":m '<-2<CR>gv=gv")
 
 -- split vertically and split horizontally
 -- navigate and close.
-vim.keymap.set("n", "Sv", "<C-w>v<CR>")
-vim.keymap.set("n", "Sh", "<C-w>s<CR>")
-vim.keymap.set("n", "A", "<C-w>h<CR>")
-vim.keymap.set("n", "D", "<C-w>l<CR>")
-vim.keymap.set("n", "W", "<C-w>k<CR>")
-vim.keymap.set("n", "S", "<C-w>j<CR>")
+vim.keymap.set("n", "spv", "<C-w>v<CR>")
+vim.keymap.set("n", "sph", "<C-w>s<CR>")
+vim.keymap.set("n", "mtl", "<C-w>h<CR>")
+vim.keymap.set("n", "mtr", "<C-w>l<CR>")
+vim.keymap.set("n", "mtt", "<C-w>k<CR>")
+vim.keymap.set("n", "mtb", "<C-w>j<CR>")
 vim.keymap.set("n", "<leader>1", "<C-w>o<CR>")
 
 -- Move between opened buffers and close them if i want

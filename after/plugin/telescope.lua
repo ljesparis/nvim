@@ -1,7 +1,7 @@
-local R = require("ljesparis.utils")
+local importer = require("ljesparis.utils")
 
-local tls_builtin = R.require('telescope.builtin');
-local tls = R.require('telescope');
+local tls_builtin = importer.require('telescope.builtin');
+local tls = importer.require('telescope');
 
 local T = {};
 

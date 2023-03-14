@@ -5,6 +5,7 @@ local tls = importer.require('telescope');
 
 local T = {};
 
+--
 T.find_dotfiles = function()
     tls_builtin.find_files({
         cwd = "~/.config/nvim/",
@@ -24,6 +25,11 @@ T.find_files = function()
     })
 end
 
+--
+T.find_files_with_regexp_pattern = function()
+    tls_builtin.grep_string({ search = vim.fn.input("Grep > ") });
+end
+
 
 tls.setup({})
 
@@ -32,6 +38,4 @@ vim.keymap.set('n', '<leader>ff', T.find_files, {}) -- List project files
 vim.keymap.set('n', '<leader>fb', tls_builtin.buffers, {}) -- List current opened
 vim.keymap.set('n', '<leader>fh', tls_builtin.help_tags, {}) -- List nvim help pages
 vim.keymap.set('n', '<leader>fmp', tls_builtin.man_pages, {}) -- It's kinda obvious.
-vim.keymap.set('n', '<leader>gp', function() --
-    tls_builtin.grep_string({ search = vim.fn.input("Grep > ") });
-end)
+vim.keymap.set('n', '<leader>gp', T.find_files_with_regexp_pattern)

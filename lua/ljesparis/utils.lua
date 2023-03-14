@@ -1,6 +1,7 @@
 local U = {};
 
--- Basically require a
+-- This function try to import a module, if it fails
+-- throw an error.
 U.require = function(pkg)
     local ok, imported_pkg = pcall(require, pkg)
     if not ok then

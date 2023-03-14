@@ -1,10 +1,17 @@
-local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-    return
-end
+local importer = require("ljesparis.utils");
+local treesitter_configs = importer.require("nvim-treesitter.configs");
 
-configs.setup({
-    ensure_installed = { "help", "c", "javascript", "lua", "python", "typescript", "rust" },
+
+treesitter_configs.setup({
+    ensure_installed = {
+        "help",
+        "c",
+        "javascript",
+        "lua",
+        "python",
+        "typescript",
+        "rust"
+    },
     sync_install = false,
     auto_install = true,
 

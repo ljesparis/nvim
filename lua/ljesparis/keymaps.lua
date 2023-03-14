@@ -1,4 +1,5 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>w", ":w!<CR>")
 
 -- Move code down and up respectively
 vim.keymap.set("v", "T", ":m '>+1<CR>gv=gv")

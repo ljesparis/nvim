@@ -1,0 +1,95 @@
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set expandtab
+set smarttab
+set relativenumber
+set clipboard+=unnamed
+set number
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+let mapleader = " "
+
+
+" Idea vim config. This config only fits for
+" Idea editors.
+set multiple-cursors
+set ideajoin
+set ideaput
+set surround
+set highlightedyank
+set idearefactormode=keep
+set ideajoin
+set showmode
+set NERDTree
+
+
+" -----------------------------------------------
+" |               File Search                   |
+" -----------------------------------------------
+nnoremap <leader>ff :action FindInPath<CR>
+nnoremap <leader>fg :action GotoFile<CR>
+nnoremap <leader>fr :action RecentFiles<CR>
+
+" -----------------------------------------------
+" |             NerdTree and Windows            |
+" -----------------------------------------------
+nnoremap no :NERDTree<CR>
+nnoremap ncl :NERDTreeClose<CR>
+nnoremap tw :action HideAllWindows<CR>
+" HideAllWindows action toggle recently opened windows
+
+" -----------------------------------------------
+" |                  Buffers                    |
+" -----------------------------------------------
+nnoremap spv :action SplitVertically <CR>
+nnoremap sph :action SplitHorizontally <CR>
+nnoremap mtn :action NextSplitter<CR>
+nnoremap <leader>1 :action UnsplitAll<CR>
+
+" -----------------------------------------------
+" |                   File                      |
+" -----------------------------------------------
+nnoremap <leader>RF :action RenameFile<CR>
+nnoremap <leader>OP :action OptimizeImports<CR>
+nnoremap <leader>w  :w!<CR>
+nnoremap <C-c> :action CommentByLineComment<CR>
+vnoremap <C-c> :action CommentByLineComment<CR>
+
+" -----------------------------------------------
+" |               Refactoring                   |
+" -----------------------------------------------
+vnoremap em :action ExtractMethod <CR>
+nnoremap em :action ExtractMethod <CR>
+vnoremap es :action ExtractSuperclass <CR>
+vnoremap ev :action IntroduceVariable <CR>
+vnoremap ec :action IntroduceConstant <CR>
+nnoremap <leader>mm :action GotoSuperMethod<CR>
+nnoremap <leader>I :action Generate <CR>
+
+
+" -----------------------------------------------
+" |             Move Block of code              |
+" -----------------------------------------------
+nnoremap T :action MoveLineUp <CR>
+vnoremap T :action MoveLineUp <CR>
+nnoremap B :action MoveLineDown <CR>
+vnoremap B :action MoveLineDown <CR>
+
+
+" -----------------------------------------------
+" |                 Run/Debug                   |
+" -----------------------------------------------
+nnoremap <leader>ru :action Run<CR>
+vnoremap <leader>ru :action Run<CR>
+nnoremap <leader>st :action Stop<CR>
+vnoremap <leader>st :action Stop<CR>
+nnoremap <leader>de :action Debug<CR>
+vnoremap <leader>de :action Debug<CR>
+
+" -----------------------------------------------
+" |               Search Action                 |
+" -----------------------------------------------
+nnoremap <C-A> gg<S-v>G
+

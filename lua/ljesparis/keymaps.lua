@@ -17,4 +17,4 @@ vim.keymap.set("n", "<leader>1", "<C-w>o<CR>")
 
 -- Move between opened buffers and close them if i want
 vim.keymap.set("n", "<A-n>", ":bN<CR>")
-vim.keymap.set("n", "<leader>cb", ":bp | bd#<CR>") -- close the buffer even if it has somiething in it
+vim.keymap.set("n", "<leader>c", ":bp | bd#<CR>") -- close the buffer even if it has somiething in it

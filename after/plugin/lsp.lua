@@ -1,10 +1,11 @@
-local lsp = require('lsp-zero')
+local importer = require("ljesparis.utils")
+local lsp = importer.require('lsp-zero')
+
 lsp.preset('recommended')
 lsp.ensure_installed({
     'rust_analyzer',
     'tsserver',
-    'eslint',
-    'sumneko_lua',
+    'eslint'
 })
 
 lsp.nvim_workspace() -- configure lua for neovim
@@ -32,7 +33,6 @@ local opts = {
             other_hints_prefix = "",
         },
     },
-
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
@@ -66,32 +66,22 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.on_attach(function(_, bufnr)
-    local opts = { buffer = bufnr, remap = false }
-
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
-
+    local buffer_opts = { buffer = bufnr, remap = false }
+    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, buffer_opts)
+    vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, buffer_opts)
+    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, buffer_opts)
+    vim.keymap.set("n", "<leader>od", function() vim.diagnostic.open_float() end, buffer_opts)
+    vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, buffer_opts) -- go to next error, info or whatever
+    vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, buffer_opts) -- go to prev error, info or whatever
+    vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, buffer_opts)
+    vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, buffer_opts)
+    vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, buffer_opts) -- rename function, variable or whatever
+    vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, buffer_opts)
 end)
-
-local diag_float_grp = vim.api.nvim_create_augroup("DiagnosticFloat", { clear = true })
-vim.api.nvim_create_autocmd("CursorHold", {
-    callback = function()
-        vim.diagnostic.open_float(nil, { focusable = false })
-    end,
-    group = diag_float_grp,
-})
 
 -- auto command that will format rust files
 vim.api.nvim_create_autocmd("BufWritePre", {
     callback = function()
-        vim.lsp.buf.formatting_sync(nil, 200)
+        vim.lsp.buf.format(nil, 100)
     end,
 })

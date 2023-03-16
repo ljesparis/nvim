@@ -30,22 +30,37 @@ local opts = {
             parameter_hints_prefix = "",
             other_hints_prefix = "",
         },
+
+        hover_actions = {
+            auto_focus = true
+        },
     },
     -- all the opts to send to nvim-lspconfig
     -- these override the defaults set by rust-tools.nvim
     -- see https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md#rust_analyzer
     server = lsp.build_options('rust_analyzer', {
         single_file_support = false,
+        on_attach = function(_, bufnr)
+            local buffer_opts = { buffer = bufnr, remap = false }
+            -- https://github.com/simrat39/rust-tools.nvim
+
+            vim.keymap.set("n", "<leader>,r", rust_tools.runnables.runnables, buffer_opts)
+            vim.keymap.set("n", "<leader>em", rust_tools.expand_macro.expand_macro, buffer_opts)
+            vim.keymap.set("n", "<leader>K", rust_tools.hover_actions.hover_actions, buffer_opts)
+        end
     }),
 }
 rust_tools.setup(opts);
 
 
-lsp.on_attach(function (_, bufnr)
+lsp.on_attach(function(_, bufnr)
     local buffer_opts = { buffer = bufnr, remap = false }
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, buffer_opts)
+
+    -- show popup with object information
     vim.keymap.set("n", "K", vim.lsp.buf.hover, buffer_opts)
-    vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, buffer_opts)
+
+    --
     vim.keymap.set("n", "<leader>od", vim.diagnostic.open_float, buffer_opts)
 
     -- go to next error, info or whatever
@@ -54,7 +69,7 @@ lsp.on_attach(function (_, bufnr)
     -- go to prev error, info or whatever
     vim.keymap.set("n", "<C-p>", vim.diagnostic.goto_prev, buffer_opts)
 
-    -- execute a code action 
+    -- execute a code action
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, buffer_opts)
 
     -- Check variable, function, classes references
@@ -62,7 +77,6 @@ lsp.on_attach(function (_, bufnr)
 
     -- rename variable, function, classes references
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, buffer_opts) -- rename function, variable or whatever
-    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, buffer_opts)
 end);
 
 
@@ -80,6 +94,3 @@ end);
 -- lsp.setup_nvim_cmp({
 --    mapping = cmp_mappings,
 -- })
-
-
-

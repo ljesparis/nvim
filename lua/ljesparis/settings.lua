@@ -1,5 +1,8 @@
 vim.o.guicursor = ""
 
+vim.o.ttyfast = true
+vim.o.lazyredraw = true
+
 vim.o.wildmode = "longest,list,full"
 
 vim.opt.shortmess = vim.opt.shortmess + "c"

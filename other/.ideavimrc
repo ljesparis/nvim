@@ -7,10 +7,19 @@ set smarttab
 set relativenumber
 set clipboard+=unnamed
 set number
+set updatetime=1000
 set backspace=eol,start,indent
+set lazyredraw
+set ttyfast
 set whichwrap+=<,>,h,l
+set nobackup
+set nowritebackup
 let mapleader = " "
 
+" https://github.com/kabasakalis/dotfiles/blob/master/neovim/.ideavimrc#L72&L74
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 
 " Idea vim config. This config only fits for
 " Idea editors.
@@ -76,6 +85,11 @@ nnoremap <leader>st :action Stop<CR>
 vnoremap <leader>st :action Stop<CR>
 nnoremap <leader>de :action Debug<CR>
 vnoremap <leader>de :action Debug<CR>
+
+" -----------------------------------------------
+" |                 Other                       |
+" -----------------------------------------------
+nnoremap Q :noh<CR>
 
 " -----------------------------------------------
 " |               Search Action                 |

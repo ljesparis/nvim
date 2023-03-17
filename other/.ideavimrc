@@ -24,7 +24,6 @@ set ideajoin
 set showmode
 set NERDTree
 
-
 " -----------------------------------------------
 " |               File Search                   |
 " -----------------------------------------------
@@ -39,14 +38,6 @@ nnoremap no :NERDTree<CR>
 nnoremap ncl :NERDTreeClose<CR>
 nnoremap tw :action HideAllWindows<CR>
 " HideAllWindows action toggle recently opened windows
-
-" -----------------------------------------------
-" |                  Buffers                    |
-" -----------------------------------------------
-nnoremap spv :action SplitVertically <CR>
-nnoremap sph :action SplitHorizontally <CR>
-nnoremap mtn :action NextSplitter<CR>
-nnoremap <leader>1 :action UnsplitAll<CR>
 
 " -----------------------------------------------
 " |                   File                      |
@@ -68,7 +59,6 @@ vnoremap ec :action IntroduceConstant <CR>
 nnoremap <leader>mm :action GotoSuperMethod<CR>
 nnoremap <leader>I :action Generate <CR>
 
-
 " -----------------------------------------------
 " |             Move Block of code              |
 " -----------------------------------------------
@@ -76,7 +66,6 @@ nnoremap T :action MoveLineUp <CR>
 vnoremap T :action MoveLineUp <CR>
 nnoremap B :action MoveLineDown <CR>
 vnoremap B :action MoveLineDown <CR>
-
 
 " -----------------------------------------------
 " |                 Run/Debug                   |
@@ -92,4 +81,3 @@ vnoremap <leader>de :action Debug<CR>
 " |               Search Action                 |
 " -----------------------------------------------
 nnoremap <C-A> gg<S-v>G
-

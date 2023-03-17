@@ -1,3 +1,3 @@
 # Special folder
 
-this file contains the vim settings that I use in other IDEs, such as intellij.
+This folder contains vim configuration for that i use in other IDEs.

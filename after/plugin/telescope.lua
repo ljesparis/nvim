@@ -37,4 +37,5 @@ vim.keymap.set('n', '<leader>ff', T.find_files, {}) -- List project files
 vim.keymap.set('n', '<leader>fb', tls_builtin.buffers, {}) -- List current opened
 vim.keymap.set('n', '<leader>fh', tls_builtin.help_tags, {}) -- List nvim help pages
 vim.keymap.set('n', '<leader>fmp', tls_builtin.man_pages, {}) -- It's kinda obvious.
-vim.keymap.set('n', '<leader>gp', T.find_files_with_regexp_pattern)
+vim.keymap.set('n', '<leader>gp', T.find_files_with_regexp_pattern, {})
+vim.keymap.set('n', '<leader>lgp', tls_builtin.live_grep, {})

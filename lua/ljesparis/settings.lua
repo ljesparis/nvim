@@ -6,7 +6,7 @@ vim.o.lazyredraw = true
 vim.o.wildmode = "longest,list,full"
 
 vim.opt.shortmess = vim.opt.shortmess + "c"
-vim.o.completeopt = "menuone,noinsert,noselect"
+vim.o.completeopt = "menuone,noselect"
 
 vim.o.number = true
 vim.o.relativenumber = true
@@ -31,7 +31,8 @@ vim.o.scrolloff = 8
 vim.wo.signcolumn = "yes"
 
 vim.o.updatetime = 50
-vim.o.timeoutlen = 500
+vim.o.timeout = true
+vim.o.timeoutlen = 300
 
 vim.o.smartcase = true
 vim.o.splitbelow = true
@@ -43,3 +44,4 @@ vim.o.joinspaces = false
 vim.o.clipboard = "unnamedplus"
 vim.o.fileencoding = "utf-8"
 vim.g.mapleader = " "
+

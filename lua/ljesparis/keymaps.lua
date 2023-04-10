@@ -17,3 +17,6 @@ vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 --
 vim.keymap.set("n", "Q", ":noh<CR>")
 
+-- exit terminal mode
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n><CR>")
+vim.keymap.set({"n", "v"}, "<leader>st", ":ToggleTerm<CR>")

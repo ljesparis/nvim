@@ -1,4 +1,4 @@
-local importer = require("ljesparis.utils");
+local importer = require('ljesparis.utils');
 importer.require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nvim-tree/nvim-web-devicons'
@@ -35,8 +35,7 @@ importer.require('packer').startup(function(use)
 
     use { 'numToStr/Comment.nvim', opts = {} }
 
-    use {"akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
+    use {'akinsho/toggleterm.nvim', tag = '*', config = function()
+        require('toggleterm').setup()
     end}
-
 end)

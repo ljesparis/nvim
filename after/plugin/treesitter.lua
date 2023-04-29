@@ -4,9 +4,7 @@ local treesitter_configs = importer.require("nvim-treesitter.configs");
 
 treesitter_configs.setup({
     ensure_installed = {
-        "help",
         "c",
-        "javascript",
         "lua",
         "python",
         "typescript",

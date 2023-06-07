@@ -95,3 +95,9 @@ nnoremap Q :noh<CR>
 " |               Search Action                 |
 " -----------------------------------------------
 nnoremap <C-A> gg<S-v>G
+
+" -----------------------------------------------
+" |             Mode between tabs               |
+" -----------------------------------------------
+nnoremap <C-l> :action NextTab <CR>
+nnoremap <C-h> :action PreviousTab <CR>

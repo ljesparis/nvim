@@ -94,7 +94,7 @@ nnoremap Q :noh<CR>
 " -----------------------------------------------
 " |               Search Action                 |
 " -----------------------------------------------
-nnoremap <C-A> gg<S-v>G
+nnoremap <C-p> gg<S-v>G " it doesn't work on macos try ⌘+⇧+A
 
 " -----------------------------------------------
 " |             Mode between tabs               |

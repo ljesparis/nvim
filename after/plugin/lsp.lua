@@ -79,6 +79,9 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, buffer_opts) -- rename function, variable or whatever
 end);
 
+vim.diagnostic.config({
+    virtual_text = true
+})
 
 -- Setup Completion
 -- See https://github.com/hrsh7th/nvim-cmp#basic-configuration

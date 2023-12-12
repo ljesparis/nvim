@@ -71,10 +71,10 @@ nnoremap <leader>I :action Generate <CR>
 " -----------------------------------------------
 " |             Move Block of code              |
 " -----------------------------------------------
-nnoremap T :action MoveLineUp <CR>
-vnoremap T :action MoveLineUp <CR>
-nnoremap B :action MoveLineDown <CR>
-vnoremap B :action MoveLineDown <CR>
+nnoremap Z :action MoveLineUp <CR>
+vnoremap Z :action MoveLineUp <CR>
+nnoremap X :action MoveLineDown <CR>
+vnoremap X :action MoveLineDown <CR>
 
 " -----------------------------------------------
 " |                 Run/Debug                   |

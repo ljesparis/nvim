@@ -3,7 +3,6 @@ local importer = require("ljesparis.utils")
 local lsp = importer.require('lsp-zero')
 local rust_tools = importer.require("rust-tools");
 
-
 -- Right now i want to have everything configured,
 -- so i'm going to use default lsp-zero preset.
 lsp.preset('recommended');
@@ -11,6 +10,7 @@ lsp.ensure_installed({
     'rust_analyzer',
     'tsserver',
     'eslint',
+    'pyright'
 });
 
 

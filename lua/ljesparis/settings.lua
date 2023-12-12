@@ -30,7 +30,7 @@ vim.o.incsearch = true
 vim.o.scrolloff = 8
 vim.wo.signcolumn = "yes"
 
-vim.o.updatetime = 50
+vim.o.updatetime = 100
 vim.o.timeout = true
 vim.o.timeoutlen = 300
 
@@ -45,3 +45,4 @@ vim.o.clipboard = "unnamedplus"
 vim.o.fileencoding = "utf-8"
 vim.g.mapleader = " "
 
+vim.cmd[[colorscheme evening]]

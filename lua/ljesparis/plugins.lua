@@ -2,7 +2,6 @@ local importer = require('ljesparis.utils');
 importer.require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
     use 'nvim-tree/nvim-web-devicons'
-    use 'folke/tokyonight.nvim'
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',

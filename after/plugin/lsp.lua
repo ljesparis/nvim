@@ -12,6 +12,37 @@ vim.lsp.config("zls", {
 })
 vim.lsp.enable("zls")
 
+-- format zig files
+vim.api.nvim_create_autocmd('BufWritePre',{
+  pattern = {"*.zig", "*.zon"},
+  callback = function(ev)
+    vim.lsp.buf.format()
+  end
+})
+
+
+vim.lsp.config("pyright", {
+    cmd = { "pyright-langserver", "--stdio" },
+    filetypes = { "python" },
+    root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+    settings = {
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                typeCheckingMode = "basic",
+                useLibraryCodeForTypes = true,
+            }
+        },
+        pyright = {
+            disableOrganizeImports = false,
+        }
+    },
+})
+-- enable python
+vim.lsp.enable("pyright")
+
+
 -- global keymaps
 -- it will work on each language
 lsp_zero.on_attach(function(_, bufnr)
@@ -27,14 +58,6 @@ lsp_zero.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.references, buffer_opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, buffer_opts)
 end)
-
--- format zig files
-vim.api.nvim_create_autocmd('BufWritePre',{
-  pattern = {"*.zig", "*.zon"},
-  callback = function(ev)
-    vim.lsp.buf.format()
-  end
-})
 
 -- autocomplete
 vim.api.nvim_create_autocmd('LspAttach', {

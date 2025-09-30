@@ -45,4 +45,9 @@ vim.o.clipboard = "unnamedplus"
 vim.o.fileencoding = "utf-8"
 vim.g.mapleader = " "
 
-vim.cmd[[colorscheme evening]]
+vim.cmd[[colorscheme unokai]]
+
+-- errors on screen
+vim.diagnostic.config({
+    virtual_lines = true
+})

@@ -30,12 +30,22 @@ T.find_files_with_regexp_pattern = function()
 end
 
 
-tls.setup({})
+tls.setup({
+    defaults = {
+        layout_strategy = "flex",
+        layout_config = {
+            horizontal = { preview_cutoff = 0 }
+        }
+    },
+    pickers = {
+        colorscheme = { enable_preview = true }
+    }
+})
 
-vim.keymap.set('n', '<leader>fdt', T.find_dotfiles, {}) -- List dotfiles
 vim.keymap.set('n', '<leader>ff', T.find_files, {}) -- List project files
+vim.keymap.set('n', '<leader>fg', tls_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>fb', tls_builtin.buffers, {}) -- List current opened
 vim.keymap.set('n', '<leader>fh', tls_builtin.help_tags, {}) -- List nvim help pages
-vim.keymap.set('n', '<leader>fmp', tls_builtin.man_pages, {}) -- It's kinda obvious.
-vim.keymap.set('n', '<leader>gp', T.find_files_with_regexp_pattern, {})
-vim.keymap.set('n', '<leader>lgp', tls_builtin.live_grep, {})
+
+vim.keymap.set('n', '<leader>ft', T.find_dotfiles, {}) -- List dotfiles
+vim.keymap.set('n', '<leader>fm', tls_builtin.man_pages, {}) -- It's kinda obvious.

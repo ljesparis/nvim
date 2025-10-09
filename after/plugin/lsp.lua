@@ -3,12 +3,15 @@ local importer = require("ljesparis.utils")
 local lsp_zero = importer.require("lsp-zero")
 
 vim.lsp.config("zls", {
-  cmd = { "zls" },
-  filetypes = { "zig", "zir" },
-  root_markers = { "build.zig", ".git" },
-  settings = {
-    zls = {},
-  },
+    cmd = { "zls" },
+    filetypes = { "zig", "zir" },
+    root_markers = { "build.zig", ".git" },
+    settings = {
+        zls = {
+            semantic_tokens = "partial",
+            warn_style = true
+        },
+    },
 })
 vim.lsp.enable("zls")
 
@@ -20,6 +23,26 @@ vim.api.nvim_create_autocmd('BufWritePre',{
   end
 })
 
+-- find python interpreter
+local function get_python_path(workspace)
+  if vim.env.VIRTUAL_ENV then
+    return vim.env.VIRTUAL_ENV .. "/bin/python"
+  end
+
+  local paths = { "venv", ".venv", "env", ".env" }
+  for _, v in ipairs(paths) do
+    local python_path = workspace .. "/" .. v .. "/bin/python"
+    if vim.fn.filereadable(python_path) == 1 then
+      return python_path
+    end
+  end
+
+  local poetry_venv = vim.fn.trim(vim.fn.system("poetry env info -p 2>/dev/null"))
+  if vim.v.shell_error == 0 and poetry_venv ~= "" then
+    return poetry_venv .. "/bin/python"
+  end
+  return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+end
 
 vim.lsp.config("pyright", {
     cmd = { "pyright-langserver", "--stdio" },
@@ -28,16 +51,21 @@ vim.lsp.config("pyright", {
     settings = {
         python = {
             analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                typeCheckingMode = "basic",
                 useLibraryCodeForTypes = true,
+                diagnosticSeverityOverrides = {
+                    reportUnusedVariable = "warning",
+                },
+                typeCheckingMode = "off", -- Set type-checking mode to off
+                diagnosticMode = "off",
             }
         },
         pyright = {
             disableOrganizeImports = false,
         }
     },
+    before_init = function(_, config)
+        config.settings.python.pythonPath = get_python_path(vim.fn.getcwd())
+    end
 })
 -- enable python
 vim.lsp.enable("pyright")

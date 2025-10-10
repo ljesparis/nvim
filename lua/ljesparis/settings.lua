@@ -51,3 +51,4 @@ vim.cmd[[colorscheme unokai]]
 vim.diagnostic.config({
     virtual_lines = true
 })
+

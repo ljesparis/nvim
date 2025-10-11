@@ -1,8 +1,17 @@
 local fzf_lua = require("fzf-lua")
-fzf_lua.setup({})
+fzf_lua.setup({
+
+	keymap = {
+		builtin = {
+			["<S-n>"] = "preview-page-down",
+			["<S-p>"] = "preview-page-up",
+		},
+	},
+})
 
 vim.keymap.set("n", "<leader>f", fzf_lua.files, { desc = "Search files" })
 vim.keymap.set("n", "<leader>fg", fzf_lua.live_grep_native, { desc = "Search by Grep" })
+vim.keymap.set("n", "<leader>fb", fzf_lua.buffers, { desc = "Search buffers" })
 vim.keymap.set("n", "<leader>fh", fzf_lua.help_tags, { desc = "Search Help" })
 vim.keymap.set("n", "<leader>fk", fzf_lua.keymaps, { desc = "Search Keymaps" })
 vim.keymap.set("n", "<leader>fc", fzf_lua.git_commits, { desc = "Search Ccommits" })

@@ -1,4 +1,4 @@
-require("ljesparis.utils").require("packer").startup(function(use)
+require("packer").startup(function(use)
 	-- Package manager
 	use("wbthomason/packer.nvim")
 

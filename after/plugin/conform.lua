@@ -1,6 +1,5 @@
-local utils = require("ljesparis.utils")
-
-utils.require("conform").setup({
+local conform = require("conform")
+conform.setup({
 	-- Map of filetype to formatters
 	formatters_by_ft = {
 		lua = { "stylua" },
@@ -13,7 +12,7 @@ utils.require("conform").setup({
 
 		-- format python
 		python = function(bufnr)
-			if require("conform").get_formatter_info("ruff_format", bufnr).available then
+			if conform.get_formatter_info("ruff_format", bufnr).available then
 				return { "ruff_format" }
 			else
 				return { "isort", "black" }
@@ -40,6 +39,6 @@ utils.require("conform").setup({
 vim.api.nvim_create_autocmd("BufWritePre", {
 	pattern = "*",
 	callback = function(args)
-		utils.require("conform").format({ bufnr = args.buf })
+		conform.format({ bufnr = args.buf })
 	end,
 })

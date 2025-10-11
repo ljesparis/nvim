@@ -1,7 +1,7 @@
-require("ljesparis.utils").require("mason").setup({})
-require("ljesparis.utils").require("mason-lspconfig").setup({
+require("mason").setup({})
+require("mason-lspconfig").setup({
 	ensure_installed = { "stylua", "pyright", "zls", "rust_analyzer", "lua_ls" },
-	automatic_installation = false,
+	automatic_installation = true,
 	automatic_enable = true,
 })
 

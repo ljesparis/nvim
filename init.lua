@@ -1,1 +1,1 @@
-require "ljesparis"
+require("ljesparis")

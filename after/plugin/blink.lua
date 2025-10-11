@@ -10,7 +10,7 @@ require("blink.cmp").setup({
 			auto_show = false,
 		},
 		trigger = {
-			show_on_keyboard = true,
+			show_on_keyword = true,
 		},
 	},
 	sources = {

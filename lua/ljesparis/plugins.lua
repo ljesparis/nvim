@@ -1,25 +1,47 @@
-local importer = require('ljesparis.utils');
-importer.require('packer').startup(function(use)
-    use 'wbthomason/packer.nvim'
-    use 'nvim-tree/nvim-web-devicons'
-    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use { 'junegunn/fzf', run = ":call fzf#install()" }
-    use { 'junegunn/fzf.vim' }
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v4.x',
-        requires = {
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            { 'mrcjkb/rustaceanvim' },
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        }
-    }
+require("ljesparis.utils").require("packer").startup(function(use)
+	-- Package manager
+	use("wbthomason/packer.nvim")
 
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
-    }
+	-- Detect tabstop and shiftwidth automatically
+	use("NMAC427/guess-indent.nvim")
+
+	--use 'nvim-tree/nvim-web-devicons'
+	use("nvim-treesitter/nvim-treesitter")
+
+	-- git
+	use("lewis6991/gitsigns.nvim")
+
+	-- finder
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{
+				"nvim-telescope/telescope-fzf-native.nvim",
+				run = "make",
+				cond = function()
+					return vim.fn.executable("make") == 1
+				end,
+			},
+			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
+		},
+	})
+
+	-- formatting
+	use("stevearc/conform.nvim")
+
+	-- lsp managers
+	use("mason-org/mason.nvim")
+	use("mason-org/mason-lspconfig.nvim")
+
+	-- autocomplete
+	use({
+		"saghen/blink.cmp",
+		requires = {
+			{ "rafamadriz/friendly-snippets" },
+		},
+		--tag = "v1.7.0",
+		run = "cargo +nightly build --release",
+	})
 end)
-

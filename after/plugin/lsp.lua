@@ -84,22 +84,18 @@ vim.lsp.config("pyright", {
 	root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
 	settings = {
 		python = {
+			pythonPath = get_python_path(vim.fn.getcwd()),
 			analysis = {
+				autoSearchPaths = true,
+				diagnosticMode = "openFilesOnly",
 				useLibraryCodeForTypes = true,
-				diagnosticSeverityOverrides = {
-					reportUnusedVariable = "warning",
-				},
-				typeCheckingMode = "off", -- Set type-checking mode to off
-				diagnosticMode = "off",
+				typeCheckingMode = "off",
 			},
 		},
 		pyright = {
 			disableOrganizeImports = false,
 		},
 	},
-	before_init = function(_, config)
-		config.settings.python.pythonPath = get_python_path(vim.fn.getcwd())
-	end,
 })
 
 --
@@ -131,6 +127,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end,
 })
---
--- lspAttach - end
---

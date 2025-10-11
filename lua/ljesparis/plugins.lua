@@ -19,19 +19,9 @@ require("packer").startup(function(use)
 
 	-- finder
 	use({
-		"nvim-telescope/telescope.nvim",
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{
-				"nvim-telescope/telescope-fzf-native.nvim",
-				run = "make",
-				cond = function()
-					return vim.fn.executable("make") == 1
-				end,
-			},
-			{ "nvim-telescope/telescope-ui-select.nvim" },
-			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
-		},
+		"ibhagwan/fzf-lua",
+		requires = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
 	})
 
 	-- formatting

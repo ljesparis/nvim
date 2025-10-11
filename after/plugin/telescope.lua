@@ -1,6 +1,11 @@
 local telescope = require("telescope")
 
 telescope.setup({
+	defaults = {
+		"__pycache__/",
+		"%.pyc$",
+		"%.pyo$",
+	},
 	extensions = {
 		fzf = {
 			fuzze = true,

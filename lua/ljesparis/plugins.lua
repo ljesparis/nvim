@@ -2,6 +2,12 @@ require("packer").startup(function(use)
 	-- Package manager
 	use("wbthomason/packer.nvim")
 
+	-- statusline
+	use({
+		"nvim-mini/mini.statusline",
+		branch = "stable",
+	})
+
 	-- Detect tabstop and shiftwidth automatically
 	use("NMAC427/guess-indent.nvim")
 

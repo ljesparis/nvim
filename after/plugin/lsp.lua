@@ -1,11 +1,23 @@
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "stylua", "pyright", "zls", "rust_analyzer", "lua_ls" },
+	ensure_installed = { "stylua", "pyright", "zls", "rust_analyzer", "lua_ls", "clangd" },
 	automatic_installation = true,
 	automatic_enable = true,
 })
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
+
+--
+-- Clangd
+--
+vim.lsp.config("clangd", {
+	capabilities = vim.tbl_deep_extend("force", {}, capabilities, {}),
+	cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+	filetypes = { "c", "cpp" },
+	init_options = {
+		fallbackFlags = { "-std=c11" },
+	},
+})
 
 --
 -- Lua

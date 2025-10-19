@@ -71,9 +71,6 @@ vim.o.confirm = true
 -- Keep the same cursor in all modes
 vim.o.guicursor = ""
 
--- IMO better colorscheme
-vim.cmd.colorscheme("unokai")
-
 -- Highlight when yanking
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",

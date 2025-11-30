@@ -41,18 +41,14 @@ require("packer").startup(function(use)
 		run = "cargo +nightly build --release",
 	})
 
-	if vim.loop.os_uname().sysname == "Linux" then
-		--colorscheme (only in linux until i found out this theme for macos)
-		use({
-			"tahayvr/matteblack.nvim",
-			priority = 1000,
-		})
+	-- base colorscheme
+	use({
+		"tahayvr/matteblack.nvim",
+		priority = 1000,
+	})
 
-		use({
-			"folke/tokyonight.nvim",
-			priority = 1000,
-		})
-	else
-		vim.cmd.colorscheme("unokai")
-	end
+	use({
+		"folke/tokyonight.nvim",
+		priority = 1000,
+	})
 end)

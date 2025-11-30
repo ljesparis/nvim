@@ -18,8 +18,8 @@ if vim.fn.filereadable(theme_file) == 1 then
 	end
 end
 
-if colorscheme_to_load then
-	vim.cmd.colorscheme(colorscheme_to_load)
-else
+local status, _ = pcall(vim.cmd.colorscheme, colorscheme_to_load)
+if not status then
+	-- default colorscheme
 	vim.cmd.colorscheme("unokai")
 end

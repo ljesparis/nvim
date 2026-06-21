@@ -28,17 +28,8 @@ conform.setup({
 		lsp_format = "fallback",
 		timeout_ms = 200,
 	},
-	format_after_save = {
-		lsp_format = "fallback",
-	},
 	log_level = vim.log.levels.ERROR,
 	notify_on_error = true,
 	notify_no_formatters = true,
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = "*",
-	callback = function(args)
-		conform.format({ bufnr = args.buf })
-	end,
-})

@@ -37,7 +37,7 @@ require("packer").startup(function(use)
 		requires = {
 			{ "rafamadriz/friendly-snippets" },
 		},
-		--tag = "v1.7.0",
+		tag = "v1.10.2",
 		run = "cargo +nightly build --release",
 	})
 

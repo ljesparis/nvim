@@ -16,7 +16,7 @@ require("nvim-treesitter.configs").setup({
 
 	highlight = {
 		enable = true,
-		assitional_vim_regex_hightlighting = { "python" },
+		additional_vim_regex_highlighting = { "python" },
 	},
 	indent = { enable = true, disable = { "python" } },
 })

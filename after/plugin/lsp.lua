@@ -1,6 +1,6 @@
 require("mason").setup({})
 require("mason-lspconfig").setup({
-	ensure_installed = { "stylua", "pyright", "zls", "rust_analyzer", "lua_ls", "clangd" },
+	ensure_installed = { "pyright", "zls", "rust_analyzer", "lua_ls", "clangd" },
 	automatic_installation = true,
 	automatic_enable = true,
 })
@@ -12,7 +12,7 @@ local capabilities = require("blink.cmp").get_lsp_capabilities()
 --
 vim.lsp.config("clangd", {
 	capabilities = vim.tbl_deep_extend("force", {}, capabilities, {}),
-	cmd = { "clangd", "--background-index", "--clang-tidy", "--log=verbose" },
+	cmd = { "clangd", "--background-index", "--clang-tidy" },
 	filetypes = { "c", "cpp" },
 	init_options = {
 		fallbackFlags = { "-std=c11" },
@@ -30,7 +30,6 @@ vim.lsp.config("lua_ls", {
 -- RUST
 --
 vim.lsp.config("rust_analyzer", {
-	on_attach = on_attach,
 	capabilities = vim.tbl_deep_extend("force", {}, capabilities, {}),
 	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
@@ -94,9 +93,12 @@ vim.lsp.config("pyright", {
 	cmd = { "pyright-langserver", "--stdio" },
 	filetypes = { "python" },
 	root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
+	before_init = function(params, config)
+		local workspace = params.rootPath or vim.fn.getcwd()
+		config.settings.python.pythonPath = get_python_path(workspace)
+	end,
 	settings = {
 		python = {
-			pythonPath = get_python_path(vim.fn.getcwd()),
 			analysis = {
 				autoSearchPaths = true,
 				diagnosticMode = "openFilesOnly",
@@ -122,7 +124,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- go to lib declaration
-		map("gd", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+		map("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
 
 		-- run action
 		map("gra", vim.lsp.buf.code_action, "[G]oto Code [A]ction", { "n", "x" })
@@ -133,9 +135,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- open popup with lib doc
 		--		map("K", vim.lsp.buf.hover, "Hover")
 
-		local client = vim.lsp.get_client_by_id(event.data.client_id)
-		if client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, event.buf, { autotrigger = true })
-		end
 	end,
 })

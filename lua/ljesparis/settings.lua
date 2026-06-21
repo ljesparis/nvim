@@ -3,14 +3,11 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- set to true if nerd font is installed
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- Make line numbers default
 vim.o.number = true
 vim.o.relativenumber = true
-
--- stop selecting first option from a menu
-vim.o.completeopt = "menuone,noselect"
 
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false

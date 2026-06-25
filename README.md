@@ -73,3 +73,6 @@ Then in Neovim, from the repo whose source is mounted in the container:
    won't bind.
 
 Keymaps: `<leader>db` breakpoint, `<leader>dc` continue/attach, `<leader>di`/`do`/`dO` step into/over/out, `<leader>du` toggle UI, `<leader>dt` terminate.
+
+Full setup (generic Python, Django, two-service pattern, gotchas):
+[`docs/debugging-python-docker.md`](docs/debugging-python-docker.md).

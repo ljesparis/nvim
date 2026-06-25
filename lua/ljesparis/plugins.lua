@@ -1,54 +1,66 @@
-require("packer").startup(function(use)
-	-- Package manager
-	use("wbthomason/packer.nvim")
-
-	-- statusline
-	use({
-		"nvim-mini/mini.statusline",
-		branch = "stable",
+-- Bootstrap lazy.nvim (clones itself on a fresh machine)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"--branch=stable",
+		lazyrepo,
+		lazypath,
 	})
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
+end
+vim.opt.rtp:prepend(lazypath)
 
-	-- Detect tabstop and shiftwidth automatically
-	use("NMAC427/guess-indent.nvim")
+-- Plugin setup lives in after/plugin/*.lua, so specs stay config-free here.
+require("lazy").setup({
+	spec = {
+		-- statusline
+		{ "nvim-mini/mini.statusline", branch = "stable" },
 
-	--use 'nvim-tree/nvim-web-devicons'
-	use("nvim-treesitter/nvim-treesitter")
+		-- Detect tabstop and shiftwidth automatically
+		{ "NMAC427/guess-indent.nvim" },
 
-	-- git
-	use("lewis6991/gitsigns.nvim")
+		-- treesitter
+		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
-	-- finder
-	use({
-		"ibhagwan/fzf-lua",
-		requires = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
-	})
+		-- git
+		{ "lewis6991/gitsigns.nvim" },
 
-	-- formatting
-	use("stevearc/conform.nvim")
+		-- finder
+		{ "ibhagwan/fzf-lua", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
-	-- lsp managers
-	use("mason-org/mason.nvim")
-	use("mason-org/mason-lspconfig.nvim")
+		-- formatting
+		{ "stevearc/conform.nvim" },
 
-	-- autocomplete
-	use({
-		"saghen/blink.cmp",
-		requires = {
-			{ "rafamadriz/friendly-snippets" },
+		-- lsp managers
+		{ "mason-org/mason.nvim" },
+		{ "mason-org/mason-lspconfig.nvim" },
+
+		-- autocomplete (prebuilt rust binary auto-downloaded for the pinned tag)
+		{
+			"saghen/blink.cmp",
+			tag = "v1.10.2",
+			dependencies = { "rafamadriz/friendly-snippets" },
 		},
-		tag = "v1.10.2",
-		run = "cargo +nightly build --release",
-	})
 
-	-- base colorscheme
-	use({
-		"tahayvr/matteblack.nvim",
-		priority = 1000,
-	})
-
-	use({
-		"folke/tokyonight.nvim",
-		priority = 1000,
-	})
-end)
+		-- colorschemes
+		{ "tahayvr/matteblack.nvim", priority = 1000 },
+		{ "folke/tokyonight.nvim", priority = 1000 },
+	},
+	-- Commit lazy-lock.json (default: stdpath config) for reproducible installs.
+	install = { missing = true },
+	-- No background update checks: pins stay put until you run :Lazy sync.
+	checker = { enabled = false },
+	change_detection = { notify = false },
+})

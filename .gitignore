@@ -1,9 +1,6 @@
 # Compiled Lua sources
 luac.out
 
-# Packer auto-generated file
-plugin/packer_compiled.lua
-
 # luarocks build files
 *.src.rock
 *.zip

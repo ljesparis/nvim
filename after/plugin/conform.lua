@@ -18,8 +18,6 @@ conform.setup({
 				return { "isort", "black" }
 			end
 		end,
-		-- Use the "*" filetype to run formatters on all filetypes.
-		["*"] = { "codespell" },
 	},
 	default_format_opts = {
 		lsp_format = "fallback",

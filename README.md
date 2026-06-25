@@ -37,7 +37,4 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 
 ### Formatters (conform.nvim)
 
-`stylua`, `rustfmt`, `ruff` (or `isort` + `black`), `codespell`
-
-> `codespell` runs on save for every filetype — install it or remove the
-> `["*"]` entry in `after/plugin/conform.lua`.
+`stylua` (lua), `rustfmt` (rust), `ruff` (or `isort` + `black`, python)

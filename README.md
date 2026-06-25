@@ -20,9 +20,20 @@ commits recorded in `lazy-lock.json` (use `:Lazy sync` to update and re-pin).
 * A C compiler (`gcc`/`clang`) — nvim-treesitter compiles parsers
 * A Nerd Font
 
-### Language servers (installed via `:Mason`, must be on PATH)
+### Language servers (installed via `:Mason`)
 
 `clangd`, `rust-analyzer`, `zls`, `pyright`, `lua_ls`
+
+Mason installs binaries to `~/.local/share/nvim/mason/bin`. The LSP configs in
+`after/plugin/lsp.lua` call them by bare name, so that directory must be on your
+`PATH`. Add to your shell rc (`.bashrc`/`.zshrc`):
+
+```sh
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+```
+
+> Mason has no lockfile — server versions are not pinned and track latest on
+> install. Plugin commits are pinned (`lazy-lock.json`); server binaries are not.
 
 ### Formatters (conform.nvim)
 

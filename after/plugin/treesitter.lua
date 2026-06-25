@@ -1,5 +1,4 @@
 require("nvim-treesitter.configs").setup({
-	build = ":TSUpdate",
 	ensure_installed = {
 		"c",
 		"zig",

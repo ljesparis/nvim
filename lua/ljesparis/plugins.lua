@@ -31,8 +31,9 @@ require("lazy").setup({
 		-- Detect tabstop and shiftwidth automatically
 		{ "NMAC427/guess-indent.nvim" },
 
-		-- treesitter
-		{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+		-- treesitter (pin master: the default `main` branch is the rewrite
+		-- that removes nvim-treesitter.configs, which treesitter.lua uses)
+		{ "nvim-treesitter/nvim-treesitter", branch = "master", build = ":TSUpdate" },
 
 		-- git
 		{ "lewis6991/gitsigns.nvim" },

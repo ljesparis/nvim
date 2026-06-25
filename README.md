@@ -7,11 +7,16 @@ and pinned in `lazy-lock.json` for reproducible installs.
 
 ```sh
 git clone <this-repo> ~/.config/nvim
-nvim --headless "+Lazy! restore" +qa   # installs exact pinned plugin commits
+nvim --headless "+Lazy! restore" "+TSUpdateSync" +qa   # pinned plugins + treesitter parsers
 ```
 
 `lazy.nvim` bootstraps itself on first launch. `Lazy! restore` installs the
 commits recorded in `lazy-lock.json` (use `:Lazy sync` to update and re-pin).
+
+`+TSUpdateSync` compiles the treesitter parsers synchronously. Without it,
+parsers build asynchronously on your first interactive launch instead (you'll
+see "Compiling..." once) — both work, but the synchronous form finishes the
+whole install in one headless command. Needs a C compiler present.
 
 ## Requirements
 

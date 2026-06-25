@@ -10,13 +10,18 @@ conform.setup({
 		-- use default formatting for zig
 		zig = { lsp_format = "fallback" },
 
-		-- format python
+		-- format python with whatever the project provides (venv-local).
+		-- Skip silently when none are installed instead of erroring on save.
 		python = function(bufnr)
 			if conform.get_formatter_info("ruff_format", bufnr).available then
 				return { "ruff_format" }
-			else
+			elseif
+				conform.get_formatter_info("isort", bufnr).available
+				and conform.get_formatter_info("black", bufnr).available
+			then
 				return { "isort", "black" }
 			end
+			return {}
 		end,
 	},
 	default_format_opts = {
@@ -28,6 +33,6 @@ conform.setup({
 	},
 	log_level = vim.log.levels.ERROR,
 	notify_on_error = true,
-	notify_no_formatters = true,
+	notify_no_formatters = false,
 })
 

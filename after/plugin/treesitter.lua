@@ -11,7 +11,9 @@ require("nvim-treesitter.configs").setup({
 		"rust",
 	},
 
-	auto_install = true,
+	-- Deterministic: only the parsers listed above (built at install via
+	-- :TSUpdate). No silent on-the-fly installs that need a compiler present.
+	auto_install = false,
 
 	highlight = {
 		enable = true,

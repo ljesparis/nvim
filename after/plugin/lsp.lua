@@ -24,6 +24,17 @@ vim.lsp.config("clangd", {
 --
 vim.lsp.config("lua_ls", {
 	capabilities = vim.tbl_deep_extend("force", {}, capabilities, {}),
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			diagnostics = { globals = { "vim" } },
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+			telemetry = { enable = false },
+		},
+	},
 })
 
 --

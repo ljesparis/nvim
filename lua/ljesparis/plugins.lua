@@ -55,6 +55,12 @@ require("lazy").setup({
 			dependencies = { "rafamadriz/friendly-snippets" },
 		},
 
+		-- debugging (DAP)
+		{
+			"rcarriga/nvim-dap-ui",
+			dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+		},
+
 		-- colorschemes
 		{ "tahayvr/matteblack.nvim", priority = 1000 },
 		{ "folke/tokyonight.nvim", priority = 1000 },

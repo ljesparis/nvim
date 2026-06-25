@@ -43,3 +43,36 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 ### Formatters (conform.nvim)
 
 `stylua` (lua), `rustfmt` (rust), `ruff` (or `isort` + `black`, python)
+
+## Debugging (Python in Docker)
+
+Remote-attach via [nvim-dap](https://github.com/mfussenegger/nvim-dap). The
+debugger runs inside the container; Neovim attaches over a published port.
+
+In the target project's `docker-compose.yml`, launch the app under debugpy and
+publish the port:
+
+```yaml
+services:
+  app:
+    command: python -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m yourapp
+    ports:
+      - "5678:5678"
+```
+
+`debugpy` must be installed in the image. `--wait-for-client` blocks the
+process until Neovim attaches, so no early breakpoints are missed.
+
+Then in Neovim, from the repo whose source is mounted in the container:
+
+1. Set breakpoints with `<leader>db`.
+2. `<leader>dc` → pick "Python: Attach to Docker (debugpy)".
+3. Enter the port (default `5678`) and the container path the source is mounted
+   at (`remoteRoot`, default `/app`). `localRoot` is the current working
+   directory — it must hold the same source as `remoteRoot` or breakpoints
+   won't bind.
+
+Keymaps: `<leader>db` breakpoint, `<leader>dc` continue/attach, `<leader>di`/`do`/`dO` step into/over/out, `<leader>du` toggle UI, `<leader>dt` terminate.
+
+Full setup (generic Python, Django, two-service pattern, gotchas):
+[`docs/debugging-python-docker.md`](docs/debugging-python-docker.md).
